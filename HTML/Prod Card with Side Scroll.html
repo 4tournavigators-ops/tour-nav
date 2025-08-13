@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tour Packages</title>
+
+  <!-- Bitter for headings -->
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 12px; /* default body size for text/buttons */
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      color: #000;
+    }
+
+    .scroll-container {
+      position: relative;
+      padding: 30px 50px;
+    }
+
+    .card-wrapper {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding-bottom: 6px;
+    }
+    .card-wrapper::-webkit-scrollbar { display: none; }
+
+    .card {
+      flex: 0 0 calc(25% - 20px);
+      background: #f5f5f5;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform .2s ease, box-shadow .2s ease;
+      display: flex;
+      flex-direction: column;
+      min-height: 300px;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    /* image + badge wrapper */
+    .image-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+    .image-wrapper img {
+      display: block;
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 15px 15px 0 0;
+      transition: transform .3s ease;
+    }
+    .card:hover .image-wrapper img { transform: scale(1.05); }
+
+    /* Tour code badge */
+    .tour-code {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      background: rgba(0,0,0,0.65);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 11px; /* ~11px */
+      pointer-events: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,.3);
+    }
+
+    .card-content {
+      padding: 15px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 140px;
+      gap: 4px;
+    }
+
+    /* Tour Name (Heading) */
+    .tour-name {
+      font-family: 'Bitter', serif;
+      font-size: 14px;
+      font-weight: 700;
+      margin: 4px 0;
+      color: #C20A3B;
+      line-height: 1.2;
+    }
+
+    /* Tour Duration */
+    .tour-duration {
+      font-size: 12px;
+      color: #260CEB;
+      margin-bottom: 6px;
+    }
+
+    /* Tour Destinations */
+    .tour-destinations {
+      font-size: 10px;
+      color: #000000;
+      margin-bottom: 10px;
+    }
+
+    /* View Details Button */
+    .btn {
+      display: inline-block;
+      padding: 6px 14px;
+      background-color: #C20A3B;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background-color .18s ease;
+      font-size: 12px;
+      margin-top: auto;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover,
+    .btn:focus { background-color: #F21154; outline: none; }
+
+    /* scroll / arrow buttons */
+    .scroll-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .scroll-btn.left { left: 12px; }
+    .scroll-btn.right { right: 12px; }
+    .scroll-btn svg { width: 20px; height: 20px; fill: #fff; display: block; }
+
+    /* responsive */
+    @media (max-width: 1024px) {
+      .card { flex: 0 0 calc(33.333% - 20px); }
+    }
+    @media (max-width: 768px) {
+      .card { flex: 0 0 calc(50% - 20px); }
+    }
+    @media (max-width: 480px) {
+      .card { flex: 0 0 100%; }
+      .scroll-container { padding: 20px; }
+      .image-wrapper img { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scroll-container">
+    <button class="scroll-btn left" onclick="scrollCards(-1)" aria-label="Previous">
+      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"></path></svg>
+    </button>
+
+    <div class="card-wrapper" id="cardWrapper">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <div class="image-wrapper">
+          <img src="https://i.postimg.cc/Qtm7TBDv/ratneshwar-mahadev-kashi-karvat-leaning-temple-varanasi.jpg" alt="Kashi Yatra">
+          <div class="tour-code">TN-03</div>
+        </div>
+        <div class="card-content">
+          <div class="tour-name">Kashi Yatra</div>
+          <div class="tour-duration">02N | 03D</div>
+          <div class="tour-destinations">Varanasi Temple Tour, Sarnath &amp; Ganga Aarti</div>
+          <a href="#" class="btn">View Details</a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <div class="image-wrapper">
+          <img src="https://i.postimg.cc/dVnD6bpT/Ram-Janambhoomi-Temple-Ayodhya.jpg" alt="Divine Ayodhya & Lucknow">
+          <div class="tour-code">TN-06</div>
+        </div>
+        <div class="card-content">
+          <div class="tour-name">Divine Ayodhya & Lucknow</div>
+          <div class="tour-duration">03N | 04D</div>
+          <div class="tour-destinations">Lucknow - Ayodhya</div>
+          <a href="#" class="btn">View Details</a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <div class="image-wrapper">
+          <img src="https://i.postimg.cc/mrjHJcnV/c7.jpg" alt="Krishna Janmabhoomi & Agra">
+          <div class="tour-code">TN-07</div>
+        </div>
+        <div class="card-content">
+          <div class="tour-name">Krishna Janmabhoomi & Agra</div>
+          <div class="tour-duration">03N | 04D</div>
+          <div class="tour-destinations">Agra - Mathura - Vrindavan</div>
+          <a href="#" class="btn">View Details</a>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <div class="image-wrapper">
+          <img src="https://i.postimg.cc/658fZhPK/Untitled.png" alt="Kashi & Ayodhya Yatra">
+          <div class="tour-code">TN-10</div>
+        </div>
+        <div class="card-content">
+          <div class="tour-name">Kashi & Ayodhya Yatra</div>
+          <div class="tour-duration">03N | 04D</div>
+          <div class="tour-destinations">Varanasi (Kashi) - Ayodhya</div>
+          <a href="#" class="btn">View Details</a>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="scroll-btn right" onclick="scrollCards(1)" aria-label="Next">
+      <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg>
+    </button>
+  </div>
+
+  <script>
+    function scrollCards(direction) {
+      const wrapper = document.getElementById('cardWrapper');
+      const card = wrapper.querySelector('.card');
+      if (!card) return;
+      const gapValue = getComputedStyle(wrapper).gap;
+      const gap = parseInt(gapValue) || 20;
+      const cardWidth = card.offsetWidth + gap;
+      wrapper.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>

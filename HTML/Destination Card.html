@@ -1,0 +1,231 @@
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, sans-serif;
+  overflow-y: hidden; /* Remove vertical scrollbar */
+}
+
+/* Section Heading */
+.section-heading {
+  text-align: center;
+  color: #c20A3B;
+  font-family: 'Bitter', serif;
+  font-size: 1.6em; /* Smaller font size */
+  margin: 25px 0 10px;
+  text-transform: uppercase;
+}
+
+/* Carousel Wrapper */
+.carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+  padding: 0 50px; /* Space for arrows */
+}
+
+/* Card Container */
+.card-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  overflow-y: hidden; /* No vertical scroll */
+  scroll-behavior: smooth;
+}
+.card-container::-webkit-scrollbar {
+  display: none; /* Hide horizontal scrollbar */
+}
+
+/* Card Style */
+.card {
+  flex: 0 0 calc(25% - 15px); /* 4 per row desktop */
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.card:hover img {
+  transform: scale(1.08);
+}
+
+/* Dark Overlay */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+.card:hover::before {
+  background: rgba(0,0,0,0.5);
+}
+
+/* Text Content */
+.card-content {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 2;
+  color: #fff;
+  padding: 0 15px;
+}
+.card-content h3 {
+  margin-bottom: 8px;
+  font-size: 1.2em;
+  font-family: 'Bitter', serif;
+}
+.card-content p {
+  font-size: 0.85em;
+  margin-bottom: 12px;
+}
+
+/* Button Style */
+.card-content a {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #c20A3B;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 25px;
+  font-family: Helvetica, Arial, sans-serif;
+  transition: background 0.3s ease;
+}
+.card-content a:hover {
+  background: #a00830;
+}
+
+/* Arrow Buttons - Transparent */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  color: #000;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 5;
+  font-size: 22px;
+  transition: color 0.3s ease, background 0.3s ease;
+}
+.arrow:hover {
+  color: #c20A3B;
+  background: rgba(255,255,255,0.6);
+}
+.arrow.left {
+  left: 10px;
+}
+.arrow.right {
+  right: 10px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .card { flex: 0 0 calc(50% - 10px); }
+}
+@media (max-width: 576px) {
+  .card { flex: 0 0 100%; }
+}
+</style>
+
+<!-- Uttar Pradesh Section -->
+<h2 class="section-heading">Uttar Pradesh</h2>
+<div class="carousel-wrapper">
+  <button class="arrow left" onclick="scrollCarousel('up-cards', -1)">&#10094;</button>
+  <div class="card-container" id="up-cards">
+    <div class="card"><img src="img/varanasi.jpg"><div class="card-content"><h3>Varanasi</h3><p>Spiritual capital of India, Ganga Aarti & temples.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/ayodhya.jpg"><div class="card-content"><h3>Ayodhya</h3><p>Birthplace of Lord Rama, Ram Mandir.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/prayagraj.jpg"><div class="card-content"><h3>Prayagraj</h3><p>Triveni Sangam & Kumbh Mela.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/chitrakoot.jpg"><div class="card-content"><h3>Chitrakoot</h3><p>Holy town with Ramayana significance.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/naimisharanya.jpg"><div class="card-content"><h3>Naimisharanya</h3><p>Ancient forest pilgrimage site.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/lucknow.jpg"><div class="card-content"><h3>Lucknow</h3><p>Nawabi culture & heritage.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/agra.jpg"><div class="card-content"><h3>Agra</h3><p>Home to the Taj Mahal.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/mathura.jpg"><div class="card-content"><h3>Mathura & Vrindavan</h3><p>Birthplace of Lord Krishna.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/shravasti.jpg"><div class="card-content"><h3>Shravasti</h3><p>Important Buddhist site.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/kushinagar.jpg"><div class="card-content"><h3>Kushinagar</h3><p>Lord Buddha's Mahaparinirvana place.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/kapilvastu.jpg"><div class="card-content"><h3>Kapilvastu (Piprahwa-India)</h3><p>Historic Buddhist site.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/sankisa.jpg"><div class="card-content"><h3>Sankisa</h3><p>Associated with Buddha's descent from heaven.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/kaushambi.jpg"><div class="card-content"><h3>Kaushambi</h3><p>Ancient city with Buddhist history.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/devdah.jpg"><div class="card-content"><h3>Devdah (Maharajganj)</h3><p>Linked to Buddha's maternal home.</p><a href="#">View Details</a></div></div>
+  </div>
+  <button class="arrow right" onclick="scrollCarousel('up-cards', 1)">&#10095;</button>
+</div>
+
+<!-- Bihar Section -->
+<h2 class="section-heading">Bihar</h2>
+<div class="carousel-wrapper">
+  <button class="arrow left" onclick="scrollCarousel('bihar-cards', -1)">&#10094;</button>
+  <div class="card-container" id="bihar-cards">
+    <div class="card"><img src="img/bodhgaya.jpg"><div class="card-content"><h3>Gaya (Bodhgaya)</h3><p>Buddha attained enlightenment here.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/rajgir.jpg"><div class="card-content"><h3>Rajgir & Nalanda</h3><p>Ancient learning & spiritual centers.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/patna.jpg"><div class="card-content"><h3>Patna</h3><p>Historic city on Ganga's banks.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/vaishali.jpg"><div class="card-content"><h3>Vaishali</h3><p>Ancient republic & Buddhist site.</p><a href="#">View Details</a></div></div>
+  </div>
+  <button class="arrow right" onclick="scrollCarousel('bihar-cards', 1)">&#10095;</button>
+</div>
+
+<!-- Madhya Pradesh Section -->
+<h2 class="section-heading">Madhya Pradesh</h2>
+<div class="carousel-wrapper">
+  <button class="arrow left" onclick="scrollCarousel('mp-cards', -1)">&#10094;</button>
+  <div class="card-container" id="mp-cards">
+    <div class="card"><img src="img/chitrakoot-mp.jpg"><div class="card-content"><h3>Chitrakoot</h3><p>Pilgrimage town in Vindhya hills.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/kalinjar.jpg"><div class="card-content"><h3>Kalinjar</h3><p>Historic fort with rich past.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/maihar.jpg"><div class="card-content"><h3>Maihar</h3><p>Known for Sharda Devi temple.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/khajuraho.jpg"><div class="card-content"><h3>Khajuraho</h3><p>UNESCO temple site.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/orchha.jpg"><div class="card-content"><h3>Orchha</h3><p>Heritage town with palaces.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/jhansi.jpg"><div class="card-content"><h3>Jhansi</h3><p>Land of Rani Lakshmibai.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/gwalior.jpg"><div class="card-content"><h3>Gwalior</h3><p>Fort city with history.</p><a href="#">View Details</a></div></div>
+  </div>
+  <button class="arrow right" onclick="scrollCarousel('mp-cards', 1)">&#10095;</button>
+</div>
+
+<!-- Jharkhand Section -->
+<h2 class="section-heading">Jharkhand</h2>
+<div class="carousel-wrapper">
+  <button class="arrow left" onclick="scrollCarousel('jharkhand-cards', -1)">&#10094;</button>
+  <div class="card-container" id="jharkhand-cards">
+    <div class="card"><img src="img/deoghar.jpg"><div class="card-content"><h3>Deoghar</h3><p>Baba Baidyanath Dham temple town.</p><a href="#">View Details</a></div></div>
+  </div>
+  <button class="arrow right" onclick="scrollCarousel('jharkhand-cards', 1)">&#10095;</button>
+</div>
+
+<!-- Nepal Section -->
+<h2 class="section-heading">Nepal</h2>
+<div class="carousel-wrapper">
+  <button class="arrow left" onclick="scrollCarousel('nepal-cards', -1)">&#10094;</button>
+  <div class="card-container" id="nepal-cards">
+    <div class="card"><img src="img/lumbini.jpg"><div class="card-content"><h3>Lumbini</h3><p>Birthplace of Lord Buddha.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/pokhara.jpg"><div class="card-content"><h3>Pokhara</h3><p>Scenic lakeside city.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/chitwan.jpg"><div class="card-content"><h3>Chitwan</h3><p>National park & wildlife.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/kathmandu.jpg"><div class="card-content"><h3>Kathmandu</h3><p>Capital with rich heritage.</p><a href="#">View Details</a></div></div>
+    <div class="card"><img src="img/janakpur.jpg"><div class="card-content"><h3>Janakpur</h3><p>Birthplace of Goddess Sita.</p><a href="#">View Details</a></div></div>
+  </div>
+  <button class="arrow right" onclick="scrollCarousel('nepal-cards', 1)">&#10095;</button>
+</div>
+
+<script>
+function scrollCarousel(id, direction) {
+  const container = document.getElementById(id);
+  const card = container.querySelector('.card');
+  const scrollAmount = card.offsetWidth + 20; // Card width + gap
+  container.scrollBy({
+    left: direction * scrollAmount,
+    behavior: 'smooth'
+  });
+}
+</script>
