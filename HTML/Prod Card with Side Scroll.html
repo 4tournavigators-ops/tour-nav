@@ -169,72 +169,80 @@
       <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"></path></svg>
     </button>
 
-    <div class="card-wrapper" id="cardWrapper">
 
-      <!-- Card 1 -->
-      <div class="card">
-        <div class="image-wrapper">
-          <img src="https://i.postimg.cc/Qtm7TBDv/ratneshwar-mahadev-kashi-karvat-leaning-temple-varanasi.jpg" alt="Kashi Yatra">
-          <div class="tour-code">TN-03</div>
-        </div>
-        <div class="card-content">
-          <div class="tour-name">Kashi Yatra</div>
-          <div class="tour-duration">02N | 03D</div>
-          <div class="tour-destinations">Varanasi Temple Tour, Sarnath &amp; Ganga Aarti</div>
-          <a href="#" class="btn">View Details</a>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="card">
-        <div class="image-wrapper">
-          <img src="https://i.postimg.cc/dVnD6bpT/Ram-Janambhoomi-Temple-Ayodhya.jpg" alt="Divine Ayodhya & Lucknow">
-          <div class="tour-code">TN-06</div>
-        </div>
-        <div class="card-content">
-          <div class="tour-name">Divine Ayodhya & Lucknow</div>
-          <div class="tour-duration">03N | 04D</div>
-          <div class="tour-destinations">Lucknow - Ayodhya</div>
-          <a href="#" class="btn">View Details</a>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="card">
-        <div class="image-wrapper">
-          <img src="https://i.postimg.cc/mrjHJcnV/c7.jpg" alt="Krishna Janmabhoomi & Agra">
-          <div class="tour-code">TN-07</div>
-        </div>
-        <div class="card-content">
-          <div class="tour-name">Krishna Janmabhoomi & Agra</div>
-          <div class="tour-duration">03N | 04D</div>
-          <div class="tour-destinations">Agra - Mathura - Vrindavan</div>
-          <a href="#" class="btn">View Details</a>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="card">
-        <div class="image-wrapper">
-          <img src="https://i.postimg.cc/658fZhPK/Untitled.png" alt="Kashi & Ayodhya Yatra">
-          <div class="tour-code">TN-10</div>
-        </div>
-        <div class="card-content">
-          <div class="tour-name">Kashi & Ayodhya Yatra</div>
-          <div class="tour-duration">03N | 04D</div>
-          <div class="tour-destinations">Varanasi (Kashi) - Ayodhya</div>
-          <a href="#" class="btn">View Details</a>
-        </div>
-      </div>
-
-    </div>
+  <div class="card-wrapper" id="cardWrapper"></div>
 
     <button class="scroll-btn right" onclick="scrollCards(1)" aria-label="Next">
       <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg>
     </button>
   </div>
 
+  <!-- Card Data CSV -->
+  <script type="text/csv" id="card-data">
+Tour Code,Tour Name,Tour Duration,Tour Destinations,Image URL,Details URL
+TN-03,Kashi Yatra,02N | 03D,"Varanasi Temple Tour, Sarnath & Ganga Aarti",https://i.postimg.cc/Qtm7TBDv/ratneshwar-mahadev-kashi-karvat-leaning-temple-varanasi.jpg,#
+TN-06,Divine Ayodhya & Lucknow,03N | 04D,Lucknow - Ayodhya,https://i.postimg.cc/dVnD6bpT/Ram-Janambhoomi-Temple-Ayodhya.jpg,#
+TN-07,Krishna Janmabhoomi & Agra,03N | 04D,Agra - Mathura - Vrindavan,https://i.postimg.cc/mrjHJcnV/c7.jpg,#
+TN-10,Kashi & Ayodhya Yatra,03N | 04D,Varanasi (Kashi) - Ayodhya,https://i.postimg.cc/658fZhPK/Untitled.png,#
+  </script>
   <script>
+    // Parse CSV utility
+    function parseCSV(data) {
+      const lines = data.trim().split(/\r?\n/);
+      const header = lines[0].split(',').map(h => h.trim());
+      return lines.slice(1).map(line => {
+        // Handle quoted commas
+        const cells = [];
+        let cur = '', inQ = false;
+        for (let i = 0; i < line.length; i++) {
+          const ch = line[i], next = line[i + 1];
+          if (ch === '"') {
+            if (inQ && next === '"') { cur += '"'; i++; }
+            else inQ = !inQ;
+          } else if (ch === ',' && !inQ) {
+            cells.push(cur); cur = '';
+          } else {
+            cur += ch;
+          }
+        }
+        cells.push(cur);
+        const obj = {};
+        header.forEach((h, idx) => obj[h] = cells[idx] !== undefined ? cells[idx].trim() : '');
+        return obj;
+      });
+    }
+
+    // Card template
+    function cardTemplate(card) {
+      return `
+        <div class="card">
+          <div class="image-wrapper">
+            <img src="${card['Image URL']}" alt="${card['Tour Name']}">
+            <div class="tour-code">${card['Tour Code']}</div>
+          </div>
+          <div class="card-content">
+            <div class="tour-name">${card['Tour Name']}</div>
+            <div class="tour-duration">${card['Tour Duration']}</div>
+            <div class="tour-destinations">${card['Tour Destinations']}</div>
+            <a href="${card['Details URL'] || '#'}" class="btn">View Details</a>
+          </div>
+        </div>
+      `;
+    }
+
+    // Render cards
+    function renderCards(cards) {
+      document.getElementById('cardWrapper').innerHTML = cards.map(cardTemplate).join('');
+    }
+
+    // On DOM ready, parse and render
+    document.addEventListener('DOMContentLoaded', function() {
+      const csv = document.getElementById('card-data').textContent;
+      const cards = parseCSV(csv);
+      renderCards(cards);
+    });
+
+    // Scroll logic
     function scrollCards(direction) {
       const wrapper = document.getElementById('cardWrapper');
       const card = wrapper.querySelector('.card');
