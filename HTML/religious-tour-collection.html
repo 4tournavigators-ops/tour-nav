@@ -171,7 +171,7 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-    .badge {
+    .tour-code {
       position: absolute;
       top: 10px;
       left: 10px;
@@ -401,7 +401,7 @@ TN-32	Buddhist Heritage Circuit – India & Nepal	10N | 11D	Varanasi • Sarnath
       <article class="card" role="listitem" itemscope itemtype="https://schema.org/TouristTrip">
         <div class="card-media">
           <img src="${t.image}" alt="${alt}" loading="lazy" />
-          <span class="badge" title="Tour Code" itemprop="identifier">${t.code || ''}</span>
+          <span class="tour-code" title="Tour Code" itemprop="identifier">${t.code || ''}</span>
         </div>
         <div class="card-body">
           <h3 class="tour-name" itemprop="name">${t.name}</h3>
